@@ -47,8 +47,8 @@ The questionnaire measures four learning styles (20 questions each):
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
-   cd learn_style
+   git clone https://github.com/miko550/learning_style_questionnaire.git
+   cd learning_style_questionnaire
    ```
 
 2. **Start the application:**
