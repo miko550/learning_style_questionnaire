@@ -47,8 +47,8 @@ The questionnaire measures four learning styles (20 questions each):
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/miko550/learning_style_questionnaire.git
-   cd learning_style_questionnaire
+   git clone <repository-url>
+   cd learn_style
    ```
 
 2. **Start the application:**
@@ -59,6 +59,33 @@ The questionnaire measures four learning styles (20 questions each):
 3. **Access the application:**
    - **Web App:** http://localhost:3000
    - **API Documentation:** http://localhost:8000/docs
+
+### Configure Frontend API URL (for access from other devices)
+
+If users access the site from another device (not the server itself), configure the React app to call your server’s backend instead of localhost:
+
+1. Edit `docker-compose.yml` under the `frontend` service and set a fixed API URL:
+
+   ```yaml
+   services:
+     frontend:
+       environment:
+         REACT_APP_API_URL: http://YOUR_SERVER_IP_OR_DOMAIN:8000
+   ```
+
+2. Rebuild and restart the frontend:
+
+   ```bash
+   docker compose up -d --build frontend
+   ```
+
+3. Networking checklist:
+   - Open server firewall/cloud rules for TCP ports `3000` (frontend) and `8000` (API).
+   - Test from a remote device:
+     - Frontend: `http://YOUR_SERVER_IP:3000`
+     - API docs: `http://YOUR_SERVER_IP:8000/docs`
+   - If serving the frontend via HTTPS, ensure the backend is also HTTPS or proxied to avoid mixed-content errors.
+   - Optional: Use a reverse proxy (Nginx/Traefik) on ports 80/443 to proxy `/` → frontend (3000) and `/api` → backend (8000).
 
 ### Default Admin Account
 
